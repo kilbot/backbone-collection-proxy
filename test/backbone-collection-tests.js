@@ -70,6 +70,7 @@ $(document).ready(function() {
   });
 
   test("get with non-default ids", 4, function() {
+    debugger;
     var MongoModel = Backbone.Model.extend({idAttribute: '_id'});
     var model = new MongoModel({_id: 100});
     var col = getProxyCollection(new Backbone.Collection([model]));

@@ -6,9 +6,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'bower_components/jquery/jquery.js',
-      'bower_components/underscore/underscore.js',
-      'bower_components/backbone/backbone.js',
+      'node_modules/jquery/dist/jquery.js',
+      'node_modules/underscore/underscore.js',
+      'node_modules/backbone/backbone.js',
       'backbone-collection-proxy.js',
       'test/backbone-environment.js',
       'test/**/*.js'
@@ -19,7 +19,7 @@ module.exports = function(config) {
     // use dots reporter, as travis terminal does not support escaping sequences
     // possible values: 'dots', 'progress', 'junit', 'teamcity'
     // CLI --reporters progress
-    reporters: ['dots'],
+    reporters: ['mocha'],
 
     // web server port
     // CLI --port 9876
@@ -67,7 +67,8 @@ module.exports = function(config) {
 
     plugins: [
       'karma-qunit',
-      'karma-firefox-launcher'
+      'karma-firefox-launcher',
+      'karma-mocha-reporter'
     ]
 
   });
