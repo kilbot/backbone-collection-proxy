@@ -1,4 +1,3 @@
-
 var _ = require('underscore');
 var Backbone = require('backbone');
 
@@ -31,17 +30,17 @@ function proxyCollection(from, target) {
       target.models = from.models;
     }
 
-    if (_.contains(eventWhiteList, eventName)) {
-      if (_.contains(['add', 'remove', 'destroy'], eventName)) {
+    if (_.includes(eventWhiteList, eventName)) {
+      if (_.includes(['add', 'remove', 'destroy'], eventName)) {
         args[2] = target;
-      } else if (_.contains(['reset', 'sort'], eventName)) {
+      } else if (_.includes(['reset', 'sort'], eventName)) {
         args[1] = target;
       }
       target.trigger.apply(this, args);
     } else if (isChangeEvent) {
       // In some cases I was seeing change events fired after the model
       // had already been removed from the collection.
-      if (target.contains(args[1])) {
+      if (target.includes(args[1])) {
         target.trigger.apply(this, args);
       }
     }
@@ -50,7 +49,7 @@ function proxyCollection(from, target) {
   var methods = {};
 
   _.each(_.functions(Backbone.Collection.prototype), function(method) {
-    if (!_.contains(blacklistedMethods, method)) {
+    if (!_.includes(blacklistedMethods, method)) {
       methods[method] = function() {
         return from[method].apply(from, arguments);
       };
@@ -68,4 +67,3 @@ function proxyCollection(from, target) {
 }
 
 module.exports = proxyCollection;
-
